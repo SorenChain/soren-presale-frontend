@@ -1,0 +1,882 @@
+body {
+  font-family: 'Outfit';
+}
+.navbarC{
+
+  padding: 15px 200px;
+  background-color: #121212;
+}
+.navbar {
+  
+  /* Dark background */
+  color: #fff;
+  /* White text */
+  display: flex;
+  padding:10px  20px;
+  justify-content: space-between;
+  align-items: center;
+  /* Purple top border */
+  border: 2px solid #542ACC;
+  background-color: #08080C;
+  /* Purple bottom border */
+  font-family: sans-serif;
+  /* A clean, modern font */
+}
+
+.main-title span {
+
+  background: -webkit-linear-gradient(180deg, #F8FF50 66.71%, #A98BFF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #A98BFF;
+}
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo-text {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-right: 8px;
+  color: #e0f7fa;
+  /* Light cyan for the text */
+}
+
+.logo-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  /* You might want to add specific styling for the icon if it's a custom one */
+}
+
+.icon {
+  fill: #a7ffeb;
+  /* Bright cyan for the icon */
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 20px;
+  font-size: 1em;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #00FFC2;
+  /* Hover color */
+}
+
+.buy-now {
+  color: #00FFC2;
+  /* Specific color for "Buy Now" */
+}
+
+.open-app-button {
+  background-color: #00FFC2;
+  /* Bright cyan button */
+  color: #000;
+  /* Black text on button */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: bold;
+  margin-left: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.open-app-button:hover {
+  background-color: #00FFC2;
+  /* Darker cyan on hover */
+}
+
+.price_info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.navbarC,
+.purchase-sectionbg {
+  background-image: url(./page/assets/banner.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-color:#191924 ;
+}
+
+.purchase-section {
+  /* Dark background */
+  padding:80px 30px;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+
+.phase-info {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.price-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1em;
+}
+
+.soren-icon-small {
+  width: 20px;
+  height: 20px;
+}
+
+.progress-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.progress-bar {
+  background-color: #282838;
+  border-radius: 10px;
+  height: 20px;
+  flex-grow: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress {
+  background: linear-gradient(to right, #00f0ff, #a7ffeb, #ffff00, #ff9f00, #ff005e);
+  height: 100%;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 5px;
+}
+
+.soren-icon-progress {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  right:0;
+  
+
+}
+
+.tokens-sold {
+  font-size: 0.9em;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.next-phase-info {
+  background-color: #08080C;
+  color: #fff;
+  padding: 20px;
+  border-radius: 20px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.payment-step {
+  margin: 30px 0px;
+}
+
+.payment-step h3 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.payment-step h3 span {
+  font-size: 18px;
+  color: #bcbcbc;
+  margin-bottom: 10px;
+}
+
+
+.payment-methods {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.crypto-options,
+.card-option {
+  flex: 1;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.crypto-options p,
+.card-option p {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.crypto-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.crypto-options p {
+  text-align: start;
+  color: #bcbcbc;
+}
+
+.crypto-button {
+  background-color: #08080C;
+  color: #fff;
+  border: 1px solid #08080C;
+  border-radius: 14px;
+  padding: 8px 15px;
+  width: 250px;
+  height: 110px;
+  margin-right: 20px;
+  gap: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+}
+
+.crypto-button span {
+  font-size: 14px;
+}
+
+.crypto-button img {
+  width: 35px;
+  height: 35px;
+  margin-bottom: 10px;
+}
+
+.crypto-button.active {
+  background-color: #08080C;
+  color: #fff;
+  border-color: #00FFC2;
+}
+
+.crypto-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.or-separator {
+  color: #bcbcbc;
+  font-weight: bold;
+}
+
+.card-info {
+  background-color: #08080C;
+  color: #fff;
+  border: 1px solid #08080C;
+  border-radius: 25px;
+  padding: 8px 15px;
+  width: 100%;
+  height: 110px;
+  margin-right: 20px;
+  gap: 5px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 0.9em;
+}
+
+.card-option p {
+  text-align: left;
+  color: #bcbcbc;
+}
+
+.card-info span {
+  text-align: left;
+  padding: 20px;
+  font-size: 16px;
+  color: #bcbcbc;
+  margin-top: 10px
+}
+
+.card-info span strong {
+  font-size: 20px;
+  color: #fff !important;
+  margin-bottom: 10px !important;
+}
+
+.card-image {
+  max-width: 100px;
+  height: auto;
+}
+
+.amount-input-step {
+  margin-bottom: 20px;
+}
+
+.amount-input-step h3 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.amount-input-step h3 span {
+  font-size: 18px;
+  color: #bcbcbc;
+  margin-bottom: 10px;
+}
+
+.amount-input-container {
+  padding: 15px 0px;
+  ;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  width: 100%
+}
+
+.height_input {
+  width: 50%;
+  background-color: #0F0F18;
+  height: 80px;
+  border-radius: 14px;
+  ;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 30px;
+}
+
+.amount-input {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 24px;
+  width: 120px;
+  text-align: center;
+}
+
+.amount-input:focus,
+.result-input:focus {
+  outline: none;
+  border-color: #a7ffeb;
+}
+
+.equals-sign {
+  color: #ccc;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.currency-label {
+  color: #fff;
+  font-weight: bold;
+}
+
+.soren-icon-small {
+  width: 20px;
+  height: 20px;
+}
+
+.connect-wallet-button {
+  background-color: #00f0ff;
+  color: #191924;
+  font-weight: bold;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.1em;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.connect-wallet-button:hover {
+  background-color: #a7ffeb;
+}
+
+.how-to-buy-soren-container {
+  background-image: url(./page//assets/second.png);
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-color: #08080c;
+  /* Dark background */
+  color: #f0f0f0;
+  /* Light text */
+  padding: 40px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: sans-serif;
+}
+
+.main-title {
+  color: #e0e0e0;
+  margin-bottom: 30px;
+  font-size: 2.5em;
+  text-align: center;
+}
+
+
+
+
+
+.step-content {
+  flex-grow: 1;
+  z-index: 1;
+  /* Ensure content is above the overlay */
+}
+
+.card-title {
+  color: #eee;
+  margin-bottom: 10px;
+  font-size: 1.5em;
+}
+
+.card-description {
+  line-height: 1.6;
+  color: #ccc;
+}
+
+.copyright {
+  margin-top: 40px;
+  color: #777;
+  font-size: 0.9em;
+}
+.wallet-setup-card {
+  background-color: #181818; /* Dark background */
+  color: #f0f0f0; /* Light text */
+  padding: 30px;
+  border: 2px solid #ffff00; 
+  display: flex;
+  align-items: flex-start;
+  position: relative; /* For absolute positioning of step box and line */
+  max-width: 405px;
+}
+
+.content-box {
+  flex-grow: 1;
+  margin-right: 30px; /* Space between text and step box */
+}
+
+.card-title {
+  color: #e0e0e0;
+  margin-bottom: 15px;
+  font-size: 1.5em;
+}
+
+.card-description {
+  line-height: 1.6;
+  color: #ccc;
+  font-size: 1em;
+}
+.wallet-setup-card-1 {
+  background-color: #181818; /* Dark background */
+  color: #f0f0f0; /* Light text */
+  padding: 30px;
+  border: 2px solid #00FFC2; /* Yellow border */
+  border-radius: 10px;
+  display: flex;
+  align-items: flex-start;
+  position: relative; /* For absolute positioning of step box and line */
+  max-width: 405px; 
+}
+.wallet-setup-card-3 {
+  background-color: #181818; /* Dark background */
+  color: #f0f0f0; /* Light text */
+  padding: 30px;
+  border: 2px solid #A98BFF; /* Yellow border */
+  border-radius: 10px;
+  display: flex;
+  align-items: flex-start;
+  position: relative; /* For absolute positioning of step box and line */
+  max-width: 405px;
+}
+.step-box-1 {
+  background-color: #00FFC2; /* Yellow background for step */
+  color: #000; /* Black text for step number */
+  font-weight: bold;
+  padding: 15px 25px;
+  border-radius: 8px;
+  font-size: 1.2em;
+  white-space: nowrap;
+  position: absolute;
+  left: -303px;
+  top: 144px;
+  border: 2px solid #00FFC2;
+  z-index: 9;
+  border-top-left-radius: 0;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 10px; /* Prevent text wrapping */
+}
+
+.connector-line-1 {
+  position: absolute;
+    background-color: #00FFC2;
+    height: 2px;
+    width: 302px;
+    top: 50%;
+    left: calc(-293px - 10px);
+    transform: translateY(-50%);
+}
+
+.step-box {
+  background-color: #ffff00; /* Yellow background for step */
+  color: #000; /* Black text for step number */
+  font-weight: bold;
+  padding: 15px 25px;
+  border-radius: 8px;
+  font-size: 1.2em;
+  white-space: nowrap;
+  position: absolute;
+  right:-300px;
+  top:130px;
+  border: 2px solid #ffff00;
+  border-top-left-radius: 0;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 10px; /* Prevent text wrapping */
+}
+
+.connector-line {
+  position: absolute;
+  background-color: #ffff00;
+  height: 2px;
+  width: 190px;
+  top: 50%;
+  right: calc(-182px - 10px);
+  transform: translateY(-50%);
+}
+.step-box-3 {
+  background-color: #A98BFF; /* Yellow background for step */
+  color: #000; /* Black text for step number */
+  font-weight: bold;
+  padding: 15px 25px;
+  border-radius: 8px;
+  font-size: 1.2em;
+  white-space: nowrap;
+  position: absolute;
+  right:-300px;
+  top:130px;
+  border: 2px solid #A98BFF;
+  border-top-left-radius: 0;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 10px;
+ /* Prevent text wrapping */
+}
+
+.connector-line-3 {
+  position: absolute;
+  background-color: #A98BFF;
+  height: 2px;
+  width: 190px;
+  top: 54%;
+  right: calc(-182px - 10px);
+  transform: translateY(-50%);
+}
+.connector-top{
+  height: 293px;
+  width: 2px;
+  position: absolute;
+  background: #bcbcbc;
+  top: -148px;
+  left: -258px;
+
+}
+/* Progress Bar Styles */
+.progress-container {
+  position: relative;
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+.progress-bar-background {
+  width: 100%;
+  height: 25px;
+  background: white; /* bg-gray-800 */
+  border-radius: 9999px; /* rounded-full */
+  position: relative; /* Add this to make it a positioning context */
+}
+
+.progress-bar-fill {
+  height: 25px;
+  width: 40%; /* Adjust as needed to show progress */
+  border-radius: 50px; /* rounded-full */
+  background: linear-gradient(180deg, #F8FF50 0%, #00FFC2 50%, #8C64FF 100%);
+}
+
+.progress-indicator {
+  position: absolute;
+  left: 40%; /* This positions it at exactly 65% mark */
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 9999px; /* rounded-full */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+  color: #000000; /* text-black */
+}
+.progress-indicator img{
+width:60px;
+}
+
+.indicator-icon {
+  width: 20px; /* w-5 */
+  height: 20px; /* h-5 */
+}
+.connect-wallet-button {
+  padding: 12px 24px;
+  background-color: #00FFC2; /* Bright cyan */
+  color: #000;
+  font-size: 1.1em;
+  font-weight: bold;
+  border: none; /* Remove the default border */
+  /* outline: 4px solid #00FFC2; */
+  /* outline-offset: -2px; */
+  border-radius:  0; /* Specific border-radius for top-left and bottom-right */
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, outline-color 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  font-family: 'monospace', sans-serif; /* Use a monospace font for a more digital look */
+  letter-spacing: 1px;
+  width: fit-content;
+  display: flex
+;
+  margin:40px auto;
+  text-align: center; /* Center the text */
+  position: relative;
+  z-index: 1;
+}
+.connect-wallet-button:before {
+  content: '';
+  position: absolute;
+  top: 3px;
+  bottom: 0;
+  left: -7px;
+  right: 0;
+  width: calc(100% + 15px);
+  background-color: #a7ffeb;
+  z-index: -1;
+  height: 43px;
+}
+.connect-wallet-button:hover {
+  background-color: #00e0e0;
+  outline-color: #00e0e0;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.connect-wallet-button:active {
+  background-color: #00c0c0;
+  outline-color: #00c0c0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+.triangle-top-right::before {
+  content: '';
+  width: 40px;
+  height: 40px;
+  transform: rotate(45deg);
+  background-color: rgb(8 8 12);
+  border-bottom: 2px solid rgb(255 255 0);
+  position: absolute;
+  top: -21px;
+  right: -20px;
+}
+.triangle-bottom-right::after {
+  content: '';
+  width: 40px;
+  height: 40px;
+  transform: rotate(-237deg);
+  background-color: rgb(8 8 12);
+  border-bottom: 2px solid rgb(255 255 0);
+  position: absolute;
+  bottom: -16px;
+  right: -27px;
+}
+.triangle-top3-right::before {
+  content: '';
+  width: 40px;
+  height: 40px;
+  transform: rotate(45deg);
+  background-color: rgb(8 8 12);
+  border-bottom: 2px solid #A98BFF;
+  position: absolute;
+  top: -21px;
+  right: -20px;
+}
+.triangle-bottom3-right::after {
+  content: '';
+  width: 40px;
+  height: 40px;
+  transform: rotate(-237deg);
+  background-color: rgb(8 8 12);
+  border-bottom: 2px solid #A98BFF;
+  position: absolute;
+  bottom: -16px;
+  right: -27px;
+}
+.triangle-top-left::before {
+  content: '';
+  width: 40px;
+  height: 40px;
+  transform: rotate(-44deg);
+  background-color: rgb(8 8 12);
+  border-bottom: 2px solid rgba(0, 255, 194, 1);
+  position: absolute;
+  top: -21px;
+  left: -20px;
+}
+.triangle-bottom-left::after {
+  content: '';
+  width: 40px;
+  height: 40px;
+  transform:rotate(-138deg);
+  background-color: rgb(8 8 12);
+  border-bottom: 2px solid #00FFC2;
+  position: absolute;
+  bottom: -21px;
+  left: -20px;
+}
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .progress-indicator {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .indicator-icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+.connector-bottom{
+  height: 300px;
+  width: 2px;
+  position: absolute;
+  background: #bcbcbc;
+  bottom: -152px;
+  left: -258px;
+}
+footer{
+  background-color: #08080C;
+  color:#636161;
+  padding:30px 0px;
+}
+footer p{
+  margin-bottom: 0px;
+}
+.container-custom {
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+
+
+
+@media (max-width: 1440px) {
+
+.purchase-section{
+  padding: 30px 30px;
+}
+.navbar{
+  padding: 15px 30px;
+}
+  }
+
+@media (max-width: 1300px) {
+.connector-top, .connector-bottom{
+ width: 0; 
+}
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .wallet-setup-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .content-box {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .connector-line {
+    display: none; /* Hide the line on smaller screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .steps-container {
+    width: 95%;
+  }
+
+  .step-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .step-number {
+    margin-bottom: 15px;
+  }
+
+  .connect-wallet-button {
+    padding: 12px 25px;
+    font-size: 1em;
+  }
+
+  .amount-input-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .amount-input,
+  .result-input {
+    width: 100%;
+  }
+
+  .payment-methods {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .or-separator {
+    display: none;
+  }
+
+  .crypto-options,
+  .card-option {
+    text-align: left;
+  }
+
+  .crypto-buttons {
+    justify-content: flex-start;
+  }
+
+  .progress-bar-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .navbar {
+    padding: 15px 20px;
+  }
+
+  .purchase-section {
+    padding: 30px 20px;
+  }
+}
