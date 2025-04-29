@@ -1,16 +1,15 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import SorenIcon from "../assets/soren-icon.svg";
 import UsdtIcon from "../assets/ETH.svg";
 import UsdIcon from "../assets/USDT.svg";
 
-function AmountInput({ selectedOption, amount, setAmount }) {
-  const [sorenTokens, setSorenTokens] = useState(0);
-
+function AmountInput({ selectedOption, amount, setAmount, convertedSoren, setConvertedSoren }) {
   const getSelectedOptionIcon = useCallback(() => {
-    if (selectedOption == "ETH") {
-      return <img src={UsdtIcon} alt="ETH" className="crypto-icon" />;
-    }
-    return <img src={UsdIcon} alt="Soren" className="soren-icon-small" />;
+    return selectedOption === "ETH" ? (
+      <img src={UsdtIcon} alt="ETH" className="crypto-icon" />
+    ) : (
+      <img src={UsdIcon} alt="USDT" className="soren-icon-small" />
+    );
   }, [selectedOption]);
 
   return (
@@ -23,12 +22,11 @@ function AmountInput({ selectedOption, amount, setAmount }) {
           <input
             className="amount-input"
             type="text"
-            inputMode="numeric"
-            pattern="[0-9]*"
+            inputMode="decimal"
             value={amount}
             onChange={(e) => {
               const value = e.target.value;
-              if (/^\d{0,20}$/.test(value)) {
+              if (/^\d*\.?\d*$/.test(value)) {
                 setAmount(value);
               }
             }}
@@ -44,13 +42,12 @@ function AmountInput({ selectedOption, amount, setAmount }) {
           <input
             className="amount-input"
             type="text"
-            inputMode="numeric"
-            pattern="[0-9]*"
-            value={sorenTokens}
+            inputMode="decimal"
+            value={convertedSoren}
             onChange={(e) => {
               const value = e.target.value;
-              if (/^\d{0,20}$/.test(value)) {
-                setSorenTokens(value);
+              if (/^\d*\.?\d*$/.test(value)) {
+                setConvertedSoren(value);
               }
             }}
             name="sorenTokens"
