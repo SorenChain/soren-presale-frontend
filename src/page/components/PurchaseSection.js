@@ -10,13 +10,15 @@ import { toast } from "react-toastify";
 import { parseEther } from "viem";
 import { ethers } from "ethers";
 
-const PRE_SALE_CONTRACT_ADDRESS = "0x18E5a0988C2374C47d8Ba9aE80a3421083C7da2C";
+const PRE_SALE_CONTRACT_ADDRESS = "0x6BB10506788e7f0deE2b7d6660fAec0EA9C1EB25";
 const USDT_TOKEN_ADDRESS = "0x9B4D9Ab057f289592726924e1C1bF24F539AD7E9";
 
 function PurchaseSection() {
   const [selectedOption, setSelectedOption] = useState("ETH");
   const [amount, setAmount] = useState();
   const [convertedSoren, setConvertedSoren] = useState(0);
+  const { address, isConnected } = useAccount();
+  const [destinationAddress, setDestinationAddress] = useState(address || "");
 
   // const provider = new ethers.getDefaultProvider(
   //   "https://polygon-amoy.infura.io/v3/bc3eae3a78c14edfa723a8c8b2548f61"
@@ -24,11 +26,13 @@ function PurchaseSection() {
   // const privateKeyAdmin = 'a4460f03c8047236a0067fadc308709a28d91b26eda79786384c78e157d5a24e';
   // const adminSigner = new ethers.Wallet(privateKeyAdmin, provider);
 
-  const { address } = useAccount();
   const { writeContract } = useWriteContract();
 
   const isUsdtOrUsd = ["USDT", "USD"].includes(selectedOption);
 
+  useEffect(() => {
+    setDestinationAddress(address || "");
+  }, [address]);
   // Pre-sale round values
   const preSaleRoundConfig = useReadContract({
     address: PRE_SALE_CONTRACT_ADDRESS,
@@ -40,8 +44,11 @@ function PurchaseSection() {
 
   const currentPreSaleRoundPrice =
     Number(preSaleRoundConfig?.data?.[3]) / 1e18 || 0;
+  const totalTokens = Number("100000000000000000000");
+  const tokensRemaining = Number("67000000000000000000");
+  const currentPhaseEndDateTime = 1746100062;
 
-  console.debug({ preSaleRoundConfig });
+  console.debug({ preSaleRoundConfig, currentPreSaleRoundPrice });
 
   const currentApproval = useReadContract({
     address: USDT_TOKEN_ADDRESS,
@@ -212,7 +219,7 @@ function PurchaseSection() {
             },
             body: JSON.stringify({
               amount: Math.round(amount * 100),
-              address,
+              address: destinationAddress || address,
             }),
           }
         );
@@ -286,7 +293,7 @@ function PurchaseSection() {
         }
       }
     }
-  }, [amount, selectedOption]);
+  }, [amount, selectedOption, destinationAddress, address]);
 
   return (
     <div className="purchase-sectionbg">
@@ -299,17 +306,25 @@ function PurchaseSection() {
             backgroundColor: "#191924",
           }}
         >
-          <PhaseInfo currentPreSaleRoundPrice={currentPreSaleRoundPrice} />
+          <PhaseInfo
+            currentPreSaleRoundPrice={currentPreSaleRoundPrice}
+            endDate={currentPhaseEndDateTime}
+            totalTokens={totalTokens}
+            tokensRemaining={tokensRemaining}
+          />
           <PaymentOptions
             selectedOption={selectedOption}
             handleSelectedOption={handleSelectedOption}
           />
           <AmountInput
+            isConnected={isConnected}
             selectedOption={selectedOption}
             amount={amount}
             setAmount={setAmount}
             convertedSoren={convertedSoren}
             setConvertedSoren={handleSorenChange}
+            destinationAddress={destinationAddress}
+            setDestinationAddress={setDestinationAddress}
           />
           {convertedSoren && (
             <div style={{ color: "white", marginTop: "10px" }}>

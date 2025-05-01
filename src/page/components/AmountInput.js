@@ -9,6 +9,9 @@ function AmountInput({
   convertedSoren,
   setConvertedSoren,
   amount = 0,
+  destinationAddress,
+  setDestinationAddress,
+  isConnected,
 }) {
   const getSelectedOptionIcon = useCallback(() => {
     return selectedOption === "ETH" ? (
@@ -63,6 +66,21 @@ function AmountInput({
             <span className="currency-label ms-2">Soren</span>
           </div>
         </div>
+      </div>
+
+      <div className="my-4">
+        <label htmlFor="walletAddress" className="block mb-1 font-medium mr-2">
+          Wallet Address to receive tokens
+        </label>
+        <input
+          type="text"
+          id="walletAddress"
+          value={destinationAddress}
+          onChange={(e) => setDestinationAddress(e.target.value)}
+          placeholder="0x..."
+          className="w-full p-2 border rounded text-white"
+          disabled={isConnected}
+        />
       </div>
     </div>
   );

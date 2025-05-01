@@ -1,34 +1,31 @@
 body {
-  font-family: 'Outfit';
+  font-family: "Outfit";
 }
-.navbarC{
-
+.navbarC {
   padding: 15px 200px;
   background-color: #121212;
 }
 .navbar {
-  
   /* Dark background */
   color: #fff;
   /* White text */
   display: flex;
-  padding:10px  20px;
+  padding: 10px 20px;
   justify-content: space-between;
   align-items: center;
   /* Purple top border */
-  border: 2px solid #542ACC;
-  background-color: #08080C;
+  border: 2px solid #542acc;
+  background-color: #08080c;
   /* Purple bottom border */
   font-family: sans-serif;
   /* A clean, modern font */
 }
 
 .main-title span {
-
-  background: -webkit-linear-gradient(180deg, #F8FF50 66.71%, #A98BFF 100%);
+  background: -webkit-linear-gradient(180deg, #f8ff50 66.71%, #a98bff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  color: #A98BFF;
+  color: #a98bff;
 }
 .navbar-left {
   display: flex;
@@ -71,17 +68,17 @@ body {
 }
 
 .nav-link:hover {
-  color: #00FFC2;
+  color: #00ffc2;
   /* Hover color */
 }
 
 .buy-now {
-  color: #00FFC2;
+  color: #00ffc2;
   /* Specific color for "Buy Now" */
 }
 
 .open-app-button {
-  background-color: #00FFC2;
+  background-color: #00ffc2;
   /* Bright cyan button */
   color: #000;
   /* Black text on button */
@@ -96,7 +93,7 @@ body {
 }
 
 .open-app-button:hover {
-  background-color: #00FFC2;
+  background-color: #00ffc2;
   /* Darker cyan on hover */
 }
 
@@ -111,16 +108,15 @@ body {
   background-image: url(./page/assets/banner.png);
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  background-color:#191924 ;
+  background-color: #191924;
 }
 
 .purchase-section {
   /* Dark background */
-  padding:80px 30px;
+  padding: 80px 30px;
   color: #fff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
-
 
 .phase-info {
   display: flex;
@@ -157,7 +153,14 @@ body {
 }
 
 .progress {
-  background: linear-gradient(to right, #00f0ff, #a7ffeb, #ffff00, #ff9f00, #ff005e);
+  background: linear-gradient(
+    to right,
+    #00f0ff,
+    #a7ffeb,
+    #ffff00,
+    #ff9f00,
+    #ff005e
+  );
   height: 100%;
   border-radius: 10px;
   display: flex;
@@ -170,9 +173,7 @@ body {
   width: 50px;
   height: 50px;
   position: absolute;
-  right:0;
-  
-
+  right: 0;
 }
 
 .tokens-sold {
@@ -182,7 +183,7 @@ body {
 }
 
 .next-phase-info {
-  background-color: #08080C;
+  background-color: #08080c;
   color: #fff;
   padding: 20px;
   border-radius: 20px;
@@ -204,7 +205,6 @@ body {
   color: #bcbcbc;
   margin-bottom: 10px;
 }
-
 
 .payment-methods {
   display: flex;
@@ -237,9 +237,9 @@ body {
 }
 
 .crypto-button {
-  background-color: #08080C;
+  background-color: #08080c;
   color: #fff;
-  border: 1px solid #08080C;
+  border: 1px solid #08080c;
   border-radius: 14px;
   padding: 8px 15px;
   width: 250px;
@@ -261,9 +261,9 @@ body {
 }
 
 .crypto-button.active {
-  background-color: #08080C;
+  background-color: #08080c;
   color: #fff;
-  border-color: #00FFC2;
+  border-color: #00ffc2;
 }
 
 .crypto-icon {
@@ -277,9 +277,9 @@ body {
 }
 
 .card-info {
-  background-color: #08080C;
+  background-color: #08080c;
   color: #fff;
-  border: 1px solid #08080C;
+  border: 1px solid #08080c;
   border-radius: 25px;
   padding: 8px 15px;
   width: 100%;
@@ -302,7 +302,7 @@ body {
   padding: 20px;
   font-size: 16px;
   color: #bcbcbc;
-  margin-top: 10px
+  margin-top: 10px;
 }
 
 .card-info span strong {
@@ -333,19 +333,17 @@ body {
 
 .amount-input-container {
   padding: 15px 0px;
-  ;
   border-radius: 8px;
   display: flex;
   align-items: center;
-  width: 100%
+  width: 100%;
 }
 
 .height_input {
   width: 50%;
-  background-color: #0F0F18;
+  background-color: #0f0f18;
   height: 80px;
   border-radius: 14px;
-  ;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -425,10 +423,6 @@ body {
   text-align: center;
 }
 
-
-
-
-
 .step-content {
   flex-grow: 1;
   z-index: 1;
@@ -455,7 +449,7 @@ body {
   background-color: #181818; /* Dark background */
   color: #f0f0f0; /* Light text */
   padding: 30px;
-  border: 2px solid #ffff00; 
+  border: 2px solid #ffff00;
   display: flex;
   align-items: flex-start;
   position: relative; /* For absolute positioning of step box and line */
@@ -482,18 +476,18 @@ body {
   background-color: #181818; /* Dark background */
   color: #f0f0f0; /* Light text */
   padding: 30px;
-  border: 2px solid #00FFC2; /* Yellow border */
+  border: 2px solid #00ffc2; /* Yellow border */
   border-radius: 10px;
   display: flex;
   align-items: flex-start;
   position: relative; /* For absolute positioning of step box and line */
-  max-width: 405px; 
+  max-width: 405px;
 }
 .wallet-setup-card-3 {
   background-color: #181818; /* Dark background */
   color: #f0f0f0; /* Light text */
   padding: 30px;
-  border: 2px solid #A98BFF; /* Yellow border */
+  border: 2px solid #a98bff; /* Yellow border */
   border-radius: 10px;
   display: flex;
   align-items: flex-start;
@@ -501,7 +495,7 @@ body {
   max-width: 405px;
 }
 .step-box-1 {
-  background-color: #00FFC2; /* Yellow background for step */
+  background-color: #00ffc2; /* Yellow background for step */
   color: #000; /* Black text for step number */
   font-weight: bold;
   padding: 15px 25px;
@@ -511,7 +505,7 @@ body {
   position: absolute;
   left: -303px;
   top: 144px;
-  border: 2px solid #00FFC2;
+  border: 2px solid #00ffc2;
   z-index: 9;
   border-top-left-radius: 0;
   border-top-right-radius: 10px;
@@ -521,12 +515,12 @@ body {
 
 .connector-line-1 {
   position: absolute;
-    background-color: #00FFC2;
-    height: 2px;
-    width: 302px;
-    top: 50%;
-    left: calc(-293px - 10px);
-    transform: translateY(-50%);
+  background-color: #00ffc2;
+  height: 2px;
+  width: 302px;
+  top: 50%;
+  left: calc(-293px - 10px);
+  transform: translateY(-50%);
 }
 
 .step-box {
@@ -538,8 +532,8 @@ body {
   font-size: 1.2em;
   white-space: nowrap;
   position: absolute;
-  right:-300px;
-  top:130px;
+  right: -300px;
+  top: 130px;
   border: 2px solid #ffff00;
   border-top-left-radius: 0;
   border-top-right-radius: 10px;
@@ -557,7 +551,7 @@ body {
   transform: translateY(-50%);
 }
 .step-box-3 {
-  background-color: #A98BFF; /* Yellow background for step */
+  background-color: #a98bff; /* Yellow background for step */
   color: #000; /* Black text for step number */
   font-weight: bold;
   padding: 15px 25px;
@@ -565,33 +559,32 @@ body {
   font-size: 1.2em;
   white-space: nowrap;
   position: absolute;
-  right:-300px;
-  top:130px;
-  border: 2px solid #A98BFF;
+  right: -300px;
+  top: 130px;
+  border: 2px solid #a98bff;
   border-top-left-radius: 0;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 10px;
- /* Prevent text wrapping */
+  /* Prevent text wrapping */
 }
 
 .connector-line-3 {
   position: absolute;
-  background-color: #A98BFF;
+  background-color: #a98bff;
   height: 2px;
   width: 190px;
   top: 54%;
   right: calc(-182px - 10px);
   transform: translateY(-50%);
 }
-.connector-top{
+.connector-top {
   height: 293px;
   width: 2px;
   position: absolute;
   background: #bcbcbc;
   top: -148px;
   left: -258px;
-
 }
 /* Progress Bar Styles */
 .progress-container {
@@ -610,56 +603,62 @@ body {
 
 .progress-bar-fill {
   height: 25px;
-  width: 40%; /* Adjust as needed to show progress */
+  width: 40%; /* Adjust as needed to show progress, this will be dynamic */
   border-radius: 50px; /* rounded-full */
-  background: linear-gradient(180deg, #F8FF50 0%, #00FFC2 50%, #8C64FF 100%);
+  background: linear-gradient(180deg, #f8ff50 0%, #00ffc2 50%, #8c64ff 100%);
 }
 
 .progress-indicator {
   position: absolute;
-  left: 40%; /* This positions it at exactly 65% mark */
   top: 50%;
   transform: translate(-50%, -50%);
-  border-radius: 9999px; /* rounded-full */
+  border-radius: 9999px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
-  color: #000000; /* text-black */
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  color: #000000;
+  transition: left 0.4s ease; /* Smooth icon movement */
 }
-.progress-indicator img{
-width:60px;
+
+.progress-indicator img {
+  width: 60px; /* Adjust size as needed */
 }
 
 .indicator-icon {
   width: 20px; /* w-5 */
   height: 20px; /* h-5 */
 }
+.indicator-icon {
+  width: 20px; /* w-5 */
+  height: 20px; /* h-5 */
+}
 .connect-wallet-button {
   padding: 12px 24px;
-  background-color: #00FFC2; /* Bright cyan */
+  background-color: #00ffc2; /* Bright cyan */
   color: #000;
   font-size: 1.1em;
   font-weight: bold;
   border: none; /* Remove the default border */
   /* outline: 4px solid #00FFC2; */
   /* outline-offset: -2px; */
-  border-radius:  0; /* Specific border-radius for top-left and bottom-right */
+  border-radius: 0; /* Specific border-radius for top-left and bottom-right */
   cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease, outline-color 0.3s ease;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease,
+    outline-color 0.3s ease;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  font-family: 'monospace', sans-serif; /* Use a monospace font for a more digital look */
+  font-family: "monospace", sans-serif; /* Use a monospace font for a more digital look */
   letter-spacing: 1px;
   width: fit-content;
-  display: flex
-;
-  margin:40px auto;
+  display: flex;
+  margin: 40px auto;
   text-align: center; /* Center the text */
   position: relative;
   z-index: 1;
 }
 .connect-wallet-button:before {
-  content: '';
+  content: "";
   position: absolute;
   top: 3px;
   bottom: 0;
@@ -682,7 +681,7 @@ width:60px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 .triangle-top-right::before {
-  content: '';
+  content: "";
   width: 40px;
   height: 40px;
   transform: rotate(45deg);
@@ -693,7 +692,7 @@ width:60px;
   right: -20px;
 }
 .triangle-bottom-right::after {
-  content: '';
+  content: "";
   width: 40px;
   height: 40px;
   transform: rotate(-237deg);
@@ -704,29 +703,29 @@ width:60px;
   right: -27px;
 }
 .triangle-top3-right::before {
-  content: '';
+  content: "";
   width: 40px;
   height: 40px;
   transform: rotate(45deg);
   background-color: rgb(8 8 12);
-  border-bottom: 2px solid #A98BFF;
+  border-bottom: 2px solid #a98bff;
   position: absolute;
   top: -21px;
   right: -20px;
 }
 .triangle-bottom3-right::after {
-  content: '';
+  content: "";
   width: 40px;
   height: 40px;
   transform: rotate(-237deg);
   background-color: rgb(8 8 12);
-  border-bottom: 2px solid #A98BFF;
+  border-bottom: 2px solid #a98bff;
   position: absolute;
   bottom: -16px;
   right: -27px;
 }
 .triangle-top-left::before {
-  content: '';
+  content: "";
   width: 40px;
   height: 40px;
   transform: rotate(-44deg);
@@ -737,12 +736,12 @@ width:60px;
   left: -20px;
 }
 .triangle-bottom-left::after {
-  content: '';
+  content: "";
   width: 40px;
   height: 40px;
-  transform:rotate(-138deg);
+  transform: rotate(-138deg);
   background-color: rgb(8 8 12);
-  border-bottom: 2px solid #00FFC2;
+  border-bottom: 2px solid #00ffc2;
   position: absolute;
   bottom: -21px;
   left: -20px;
@@ -753,13 +752,13 @@ width:60px;
     width: 24px;
     height: 24px;
   }
-  
+
   .indicator-icon {
     width: 16px;
     height: 16px;
   }
 }
-.connector-bottom{
+.connector-bottom {
   height: 300px;
   width: 2px;
   position: absolute;
@@ -767,12 +766,12 @@ width:60px;
   bottom: -152px;
   left: -258px;
 }
-footer{
-  background-color: #08080C;
-  color:#636161;
-  padding:30px 0px;
+footer {
+  background-color: #08080c;
+  color: #636161;
+  padding: 30px 0px;
 }
-footer p{
+footer p {
   margin-bottom: 0px;
 }
 .container-custom {
@@ -781,23 +780,20 @@ footer p{
   margin: 0 auto;
 }
 
-
-
-
 @media (max-width: 1440px) {
-
-.purchase-section{
-  padding: 30px 30px;
-}
-.navbar{
-  padding: 15px 30px;
-}
+  .purchase-section {
+    padding: 30px 30px;
   }
+  .navbar {
+    padding: 15px 30px;
+  }
+}
 
 @media (max-width: 1300px) {
-.connector-top, .connector-bottom{
- width: 0; 
-}
+  .connector-top,
+  .connector-bottom {
+    width: 0;
+  }
 }
 
 /* Responsive adjustments */
