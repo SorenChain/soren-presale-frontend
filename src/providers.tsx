@@ -4,7 +4,7 @@ import { WagmiProvider } from "wagmi";
 import { mainnet, polygon, optimism, arbitrum, base, polygonAmoy } from "wagmi/chains";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
-const config = getDefaultConfig({
+export const config = getDefaultConfig({
   appName: "My RainbowKit App",
   projectId: "YOUR_PROJECT_ID",
   chains: [mainnet, polygon, optimism, arbitrum, base, polygonAmoy ],

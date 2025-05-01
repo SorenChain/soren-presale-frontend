@@ -7,14 +7,22 @@ import ERC20 from "../../abis/ERC20.json";
 import preSaleABI from "../../abis/presaleABI.json";
 import { stripePromise } from "../../config/stripe";
 import { toast } from "react-toastify";
+import { parseEther } from "viem";
+import { ethers } from "ethers";
 
-const PRE_SALE_CONTRACT_ADDRESS = "0xF0367e213082B91376aF3B2024dFd7495D9433C4";
+const PRE_SALE_CONTRACT_ADDRESS = "0x18E5a0988C2374C47d8Ba9aE80a3421083C7da2C";
 const USDT_TOKEN_ADDRESS = "0x9B4D9Ab057f289592726924e1C1bF24F539AD7E9";
 
 function PurchaseSection() {
   const [selectedOption, setSelectedOption] = useState("ETH");
   const [amount, setAmount] = useState();
   const [convertedSoren, setConvertedSoren] = useState(0);
+
+  // const provider = new ethers.getDefaultProvider(
+  //   "https://polygon-amoy.infura.io/v3/bc3eae3a78c14edfa723a8c8b2548f61"
+  // );
+  // const privateKeyAdmin = 'a4460f03c8047236a0067fadc308709a28d91b26eda79786384c78e157d5a24e';
+  // const adminSigner = new ethers.Wallet(privateKeyAdmin, provider);
 
   const { address } = useAccount();
   const { writeContract } = useWriteContract();
@@ -212,6 +220,20 @@ function PurchaseSection() {
         const data = await res.json();
         const stripe = await stripePromise;
         await stripe?.redirectToCheckout({ sessionId: data.id });
+        // const presaleContractInstance = new ethers.Contract(
+        //   PRE_SALE_CONTRACT_ADDRESS,
+        //   preSaleABI,
+        //   adminSigner
+        // );
+        // const tx = await presaleContractInstance.buyWithFiat(
+        //   buyerAddress,
+        //   id,
+        //   amount
+        // );
+        // await tx.wait();
+        // console.log("Transaction hash:", tx.hash);
+        // console.log("Transaction confirmed!");
+        toast.success("Payment successful! Tokens will be processed.");
       } catch (err) {
         console.error("Stripe Checkout error:", err);
         toast.error("Payment redirect failed.");
@@ -219,17 +241,49 @@ function PurchaseSection() {
     } else {
       if (!address) return toast.error("Please connect with metamask");
       if (selectedOption === "USDT") {
-        writeContract({
-          abi: ERC20.abi,
-          address: USDT_TOKEN_ADDRESS,
-          functionName: "approve",
-          args: [PRE_SALE_CONTRACT_ADDRESS, (amount * 1_000_000).toString()],
-        });
+        if (!(currentApproval?.data <= amount * 1_000_000)) {
+          console.log(currentApproval?.data);
+          toast.error("Please approve USDT first.");
+          writeContract({
+            abi: ERC20.abi,
+            address: USDT_TOKEN_ADDRESS,
+            functionName: "approve",
+            args: [PRE_SALE_CONTRACT_ADDRESS, (amount * 1_000_000).toString()],
+          });
+        } else {
+          toast.info("Buying tokens...");
+          writeContract({
+            abi: preSaleABI,
+            address: PRE_SALE_CONTRACT_ADDRESS,
+            functionName: "buyWithUSDT",
+            args: ["1", convertedSoren.toString()],
+          });
+        }
+
         setTimeout(() => {
           currentApproval?.refetch?.();
         }, 4000);
       } else if (selectedOption === "ETH") {
-        console.log("ETH buy logic not yet implemented");
+        try {
+          console.log("ETH buy logic not yet implemented");
+          console.log(parseEther(amount.toString()), amount.toString());
+          writeContract({
+            abi: preSaleABI,
+            address: PRE_SALE_CONTRACT_ADDRESS,
+            functionName: "buyWithEth",
+            args: [1],
+            value: parseEther(amount),
+            onError: (error) => {
+              console.debug({ error: JSON.stringify(error) });
+            },
+            onSuccess: (data) => {
+              console.debug({ data: JSON.stringify(data) });
+            },
+          });
+          console.log("ETH buy logic not yet implemented");
+        } catch (error) {
+          console.error("Error in ETH buy:", JSON.stringify(error));
+        }
       }
     }
   }, [amount, selectedOption]);
