@@ -294,6 +294,17 @@
   },
   {
     "inputs": [
+      { "internalType": "address", "name": "buyer", "type": "address" },
+      { "internalType": "uint256", "name": "_id", "type": "uint256" },
+      { "internalType": "uint256", "name": "tokensToBuy", "type": "uint256" }
+    ],
+    "name": "buyWithFiat",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
       { "internalType": "uint256", "name": "_id", "type": "uint256" },
       { "internalType": "uint256", "name": "amount", "type": "uint256" }
     ],
