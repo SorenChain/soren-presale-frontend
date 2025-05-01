@@ -39,7 +39,7 @@ function PaymentOptions({ selectedOption, handleSelectedOption }) {
                 <span>USDT</span>
               </button>
 
-              <button
+              {/* <button
                 className={`crypto-button ${
                   selectedOption === "USD" ? "active" : ""
                 }`}
@@ -48,19 +48,19 @@ function PaymentOptions({ selectedOption, handleSelectedOption }) {
                 <img src={UsdIcon} alt="USD" className="crypto-icon" />
                 <br />
                 <span>USD</span>
-              </button>
+              </button> */}
             </div>
           </div>
 
           <div className="or-separator">OR</div>
 
-          <div className="card-option">
+          <div className="card-option active">
             <p>Pay with card</p>
             <div
-              className={`card-info ${
-                selectedOption === "card" ? "active" : ""
+              className={`card-info crypto-button ${
+                selectedOption === "USD" ? "active" : ""
               }`}
-              onClick={() => handleSelectedOption("card")}
+              onClick={() => handleSelectedOption("USD")}
             >
               <img src={CardImage} alt="Card" className="card-image" />
               <span>

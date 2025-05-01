@@ -5,6 +5,8 @@ import AmountInput from "./AmountInput";
 import { useAccount, useReadContract, useWriteContract } from "wagmi";
 import ERC20 from "../../abis/ERC20.json";
 import preSaleABI from "../../abis/presaleABI.json";
+import { stripePromise } from "../../config/stripe";
+import { toast } from "react-toastify";
 
 const SOREN_TOKEN_ADDRESS = "0x9B4D9Ab057f289592726924e1C1bF24F539AD7E9";
 const PRE_SALE_CONTRACT_ADDRESS = "0xF8B3aB0c0074871DD2b92652221253E8f9F546eE";
@@ -84,6 +86,58 @@ function PurchaseSection() {
     query: { enabled: selectedOption === "ETH" && convertedSoren > 0 },
   });
 
+  // TO handle the toast for success and cancel checkout page
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const status = urlParams.get("status");
+    const sessionId = urlParams.get("session_id");
+
+    if (!status) return;
+
+    const verifyPayment = async () => {
+      if (status === "success" && sessionId) {
+        toast.loading("Verifying payment...");
+
+        try {
+          const res = await fetch(
+            `http://localhost:3004/payment/verify-session?session_id=${sessionId}`,
+            {
+              method: "POST",
+            }
+          );
+          const data = await res.json();
+          toast.dismiss();
+
+          if (data.error === "Invalid session_id") {
+            // Optional toast: comment/uncomment below based on UX preference
+            // toast.error("Invalid session ID.");
+            return;
+          }
+
+          if (data.status === "paid") {
+            toast.success("Payment confirmed! Tokens will be processed.");
+          } else {
+            toast.error(`Payment status: ${data.status}`);
+          }
+        } catch (err) {
+          toast.dismiss();
+          // Optional toast for fetch error
+          // toast.error("Payment verification failed.");
+        }
+      } else if (status === "cancel") {
+        toast.error("Payment was cancelled.");
+      }
+
+      // Cleanup the URL
+      setTimeout(() => {
+        const cleanUrl = window.location.origin + window.location.pathname;
+        window.history.replaceState({}, document.title, cleanUrl);
+      }, 2000);
+    };
+
+    verifyPayment();
+  }, []);
+
   useEffect(() => {
     if (selectedOption === "USDT" && usdtToSoren?.data !== undefined) {
       setConvertedSoren(usdtToSoren.data.toString());
@@ -125,19 +179,47 @@ function PurchaseSection() {
     setSelectedOption(option);
   };
 
-  const handleBuy = useCallback(() => {
-    if (selectedOption === "USDT") {
-      writeContract({
-        abi: ERC20.abi,
-        address: USDT_TOKEN_ADDRESS,
-        functionName: "approve",
-        args: [PRE_SALE_CONTRACT_ADDRESS, (amount * 1_000_000).toString()],
-      });
-      setTimeout(() => {
-        currentApproval?.refetch?.();
-      }, 4000);
-    } else if (selectedOption === "ETH") {
-      console.log("ETH buy logic not yet implemented");
+  const handleBuy = useCallback(async () => {
+    if (!amount > 0) return toast.error("Please enter valid amount.");
+
+    if (selectedOption === "USD") {
+      try {
+        const res = await fetch(
+          "http://localhost:3004/payment/create-checkout-session",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              amount: Math.round(amount * 100),
+              address,
+            }),
+          }
+        );
+
+        const data = await res.json();
+        const stripe = await stripePromise;
+        await stripe?.redirectToCheckout({ sessionId: data.id });
+      } catch (err) {
+        console.error("Stripe Checkout error:", err);
+        toast.error("Payment redirect failed.");
+      }
+    } else {
+      if (!address) return toast.error("Please connect with metamask");
+      if (selectedOption === "USDT") {
+        writeContract({
+          abi: ERC20.abi,
+          address: USDT_TOKEN_ADDRESS,
+          functionName: "approve",
+          args: [PRE_SALE_CONTRACT_ADDRESS, (amount * 1_000_000).toString()],
+        });
+        setTimeout(() => {
+          currentApproval?.refetch?.();
+        }, 4000);
+      } else if (selectedOption === "ETH") {
+        console.log("ETH buy logic not yet implemented");
+      }
     }
   }, [amount, selectedOption]);
 

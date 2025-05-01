@@ -1,7 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "./index.css";
 import App from "./App";
+
 
 import reportWebVitals from "./reportWebVitals";
 import Provider from "./providers";
@@ -12,6 +15,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider>
+    <ToastContainer />
       <App />
     </Provider>
   </React.StrictMode>
