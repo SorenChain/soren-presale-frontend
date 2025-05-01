@@ -3,7 +3,13 @@ import SorenIcon from "../assets/soren-icon.svg";
 import UsdtIcon from "../assets/ETH.svg";
 import UsdIcon from "../assets/USDT.svg";
 
-function AmountInput({ selectedOption, amount, setAmount, convertedSoren, setConvertedSoren }) {
+function AmountInput({
+  selectedOption,
+  setAmount,
+  convertedSoren,
+  setConvertedSoren,
+  amount = 0,
+}) {
   const getSelectedOptionIcon = useCallback(() => {
     return selectedOption === "ETH" ? (
       <img src={UsdtIcon} alt="ETH" className="crypto-icon" />

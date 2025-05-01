@@ -8,20 +8,35 @@ import preSaleABI from "../../abis/presaleABI.json";
 import { stripePromise } from "../../config/stripe";
 import { toast } from "react-toastify";
 
-const SOREN_TOKEN_ADDRESS = "0x9B4D9Ab057f289592726924e1C1bF24F539AD7E9";
 const PRE_SALE_CONTRACT_ADDRESS = "0xF8B3aB0c0074871DD2b92652221253E8f9F546eE";
 const USDT_TOKEN_ADDRESS = "0x9B4D9Ab057f289592726924e1C1bF24F539AD7E9";
 
 function PurchaseSection() {
   const [selectedOption, setSelectedOption] = useState("ETH");
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState();
   const [convertedSoren, setConvertedSoren] = useState(0);
 
   const { address } = useAccount();
   const { writeContract } = useWriteContract();
 
+  const isUsdtOrUsd = ["USDT", "USD"].includes(selectedOption);
+
+  // Pre-sale round values
+  const preSaleRoundConfig = useReadContract({
+    address: PRE_SALE_CONTRACT_ADDRESS,
+    abi: preSaleABI,
+    functionName: "presale",
+    // TODO: to be fetched from env
+    args: [1],
+  });
+
+  const currentPreSaleRoundPrice =
+    Number(preSaleRoundConfig?.data?.[3]) / 1e18 || 0;
+
+  console.debug({ preSaleRoundConfig });
+
   const currentApproval = useReadContract({
-    address: SOREN_TOKEN_ADDRESS,
+    address: USDT_TOKEN_ADDRESS,
     abi: ERC20.abi,
     functionName: "allowance",
     args: address ? [address, PRE_SALE_CONTRACT_ADDRESS] : undefined,
@@ -30,17 +45,14 @@ function PurchaseSection() {
 
   // Forward conversion
   const usdtToSoren = useReadContract({
-    address:
-      selectedOption === "USDT" && amount > 0
-        ? PRE_SALE_CONTRACT_ADDRESS
-        : undefined,
+    address: isUsdtOrUsd && amount > 0 ? PRE_SALE_CONTRACT_ADDRESS : undefined,
     abi: preSaleABI,
     functionName: "usdtToTokenAmount",
     args:
-      selectedOption === "USDT" && amount > 0
+      isUsdtOrUsd && amount > 0
         ? [1, (amount * 1_000_000).toString()]
         : undefined,
-    query: { enabled: selectedOption === "USDT" && amount > 0 },
+    query: { enabled: isUsdtOrUsd && amount > 0 },
   });
 
   const POLToSoren = useReadContract({
@@ -60,16 +72,13 @@ function PurchaseSection() {
   // Reverse conversion
   const tokenToUsdt = useReadContract({
     address:
-      selectedOption === "USDT" && convertedSoren > 0
-        ? PRE_SALE_CONTRACT_ADDRESS
-        : undefined,
+      isUsdtOrUsd && convertedSoren > 0 ? PRE_SALE_CONTRACT_ADDRESS : undefined,
     abi: preSaleABI,
     functionName: "usdtBuyHelper",
-    args:
-      selectedOption === "USDT" && convertedSoren > 0
-        ? [convertedSoren]
-        : undefined,
-    query: { enabled: selectedOption === "USDT" && convertedSoren > 0 },
+    args: isUsdtOrUsd && convertedSoren > 0 ? [convertedSoren] : undefined,
+    query: {
+      enabled: isUsdtOrUsd && convertedSoren > 0,
+    },
   });
 
   const tokenToEth = useReadContract({
@@ -143,6 +152,8 @@ function PurchaseSection() {
       setConvertedSoren(usdtToSoren.data.toString());
     } else if (selectedOption === "ETH" && POLToSoren?.data !== undefined) {
       setConvertedSoren(POLToSoren.data.toString());
+    } else if (selectedOption === "USD" && usdtToSoren?.data !== undefined) {
+      setConvertedSoren(usdtToSoren.data.toString());
     } else {
       setConvertedSoren("");
     }
@@ -160,7 +171,7 @@ function PurchaseSection() {
         return;
       }
 
-      if (selectedOption === "USDT" && tokenToUsdt?.data) {
+      if (isUsdtOrUsd && tokenToUsdt?.data) {
         console.debug({ newSorenValue, action: "setting value USDT" });
 
         setAmount(
@@ -234,7 +245,7 @@ function PurchaseSection() {
             backgroundColor: "#191924",
           }}
         >
-          <PhaseInfo />
+          <PhaseInfo currentPreSaleRoundPrice={currentPreSaleRoundPrice} />
           <PaymentOptions
             selectedOption={selectedOption}
             handleSelectedOption={handleSelectedOption}

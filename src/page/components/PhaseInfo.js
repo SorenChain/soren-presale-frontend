@@ -1,14 +1,14 @@
 import React from 'react';
 import SorenIcon from '../assets/soren-icon.svg'; // Assuming you have a Soren icon as SVG
 
-function PhaseInfo() {
+function PhaseInfo({ currentPreSaleRoundPrice }) {
   return (
     <div className="phase-info">
       <div className="price-info">
         <div className='price_info'>
         <div>
         <img src={SorenIcon} alt="Soren" className="soren-icon-small" />
-        <span>1 Soren = $ 0.1758000</span>
+        <span>1 Soren = ${currentPreSaleRoundPrice}</span>
         </div>
         <div className="next-phase-info">10% Increase on Next Phase</div>
         </div>
