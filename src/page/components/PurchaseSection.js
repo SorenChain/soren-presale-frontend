@@ -100,7 +100,7 @@ function PurchaseSection() {
 
         try {
           const res = await fetch(
-            `http://localhost:3004/payment/verify-session?session_id=${sessionId}`,
+            `https://3b93-2404-7c80-5c-70f8-8f25-1ddb-3ee8-4afa.ngrok-free.app/payment/verify-session?session_id=${sessionId}`,
             {
               method: "POST",
             }
@@ -185,7 +185,7 @@ function PurchaseSection() {
     if (selectedOption === "USD") {
       try {
         const res = await fetch(
-          "http://localhost:3004/payment/create-checkout-session",
+          "https://3b93-2404-7c80-5c-70f8-8f25-1ddb-3ee8-4afa.ngrok-free.app/payment/create-checkout-session",
           {
             method: "POST",
             headers: {
