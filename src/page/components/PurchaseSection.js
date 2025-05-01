@@ -8,7 +8,7 @@ import preSaleABI from "../../abis/presaleABI.json";
 import { stripePromise } from "../../config/stripe";
 import { toast } from "react-toastify";
 
-const PRE_SALE_CONTRACT_ADDRESS = "0xF8B3aB0c0074871DD2b92652221253E8f9F546eE";
+const PRE_SALE_CONTRACT_ADDRESS = "0xF0367e213082B91376aF3B2024dFd7495D9433C4";
 const USDT_TOKEN_ADDRESS = "0x9B4D9Ab057f289592726924e1C1bF24F539AD7E9";
 
 function PurchaseSection() {
