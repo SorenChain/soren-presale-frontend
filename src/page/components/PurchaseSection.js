@@ -9,9 +9,8 @@ import { stripePromise } from "../../config/stripe";
 import { toast } from "react-toastify";
 import { parseEther } from "viem";
 import { ethers } from "ethers";
-
-const PRE_SALE_CONTRACT_ADDRESS = "0x6BB10506788e7f0deE2b7d6660fAec0EA9C1EB25";
-const USDT_TOKEN_ADDRESS = "0x9B4D9Ab057f289592726924e1C1bF24F539AD7E9";
+import { PRE_SALE_CONTRACT_ADDRESS, PRE_SALE_ROUND_ID, USDT_TOKEN_ADDRESS } from "../../constants";
+import ClaimSorenTokens from "../../components/ClaimSorenTokens";
 
 function PurchaseSection() {
   const [selectedOption, setSelectedOption] = useState("ETH");
@@ -19,13 +18,6 @@ function PurchaseSection() {
   const [convertedSoren, setConvertedSoren] = useState(0);
   const { address, isConnected } = useAccount();
   const [destinationAddress, setDestinationAddress] = useState(address || "");
-
-  // const provider = new ethers.getDefaultProvider(
-  //   "https://polygon-amoy.infura.io/v3/bc3eae3a78c14edfa723a8c8b2548f61"
-  // );
-  // const privateKeyAdmin = 'a4460f03c8047236a0067fadc308709a28d91b26eda79786384c78e157d5a24e';
-  // const adminSigner = new ethers.Wallet(privateKeyAdmin, provider);
-
   const { writeContract } = useWriteContract();
 
   const isUsdtOrUsd = ["USDT", "USD"].includes(selectedOption);
@@ -39,7 +31,7 @@ function PurchaseSection() {
     abi: preSaleABI,
     functionName: "presale",
     // TODO: to be fetched from env
-    args: [1],
+    args: [PRE_SALE_ROUND_ID],
   });
 
   const currentPreSaleRoundPrice =
@@ -65,7 +57,7 @@ function PurchaseSection() {
     functionName: "usdtToTokenAmount",
     args:
       isUsdtOrUsd && amount > 0
-        ? [1, (amount * 1_000_000).toString()]
+        ? [PRE_SALE_ROUND_ID, (amount * 1_000_000).toString()]
         : undefined,
     query: { enabled: isUsdtOrUsd && amount > 0 },
   });
@@ -79,7 +71,7 @@ function PurchaseSection() {
     functionName: "ethToTokenAmount",
     args:
       selectedOption === "ETH" && amount > 0
-        ? [1, (amount * 1e18).toString()]
+        ? [PRE_SALE_ROUND_ID, (amount * 1e18).toString()]
         : undefined,
     query: { enabled: selectedOption === "ETH" && amount > 0 },
   });
@@ -206,7 +198,8 @@ function PurchaseSection() {
   };
 
   const handleBuy = useCallback(async () => {
-    if (!amount > 0) return toast.error("Please enter valid amount.");
+    if (!amount || amount <= 0)
+      return toast.error("Please enter valid amount.");
 
     if (selectedOption === "USD") {
       try {
@@ -227,19 +220,6 @@ function PurchaseSection() {
         const data = await res.json();
         const stripe = await stripePromise;
         await stripe?.redirectToCheckout({ sessionId: data.id });
-        // const presaleContractInstance = new ethers.Contract(
-        //   PRE_SALE_CONTRACT_ADDRESS,
-        //   preSaleABI,
-        //   adminSigner
-        // );
-        // const tx = await presaleContractInstance.buyWithFiat(
-        //   buyerAddress,
-        //   id,
-        //   amount
-        // );
-        // await tx.wait();
-        // console.log("Transaction hash:", tx.hash);
-        // console.log("Transaction confirmed!");
         toast.success("Payment successful! Tokens will be processed.");
       } catch (err) {
         console.error("Stripe Checkout error:", err);
@@ -263,7 +243,7 @@ function PurchaseSection() {
             abi: preSaleABI,
             address: PRE_SALE_CONTRACT_ADDRESS,
             functionName: "buyWithUSDT",
-            args: ["1", convertedSoren.toString()],
+            args: [PRE_SALE_ROUND_ID, convertedSoren.toString()],
           });
         }
 
@@ -278,7 +258,7 @@ function PurchaseSection() {
             abi: preSaleABI,
             address: PRE_SALE_CONTRACT_ADDRESS,
             functionName: "buyWithEth",
-            args: [1],
+            args: [PRE_SALE_ROUND_ID],
             value: parseEther(amount),
             onError: (error) => {
               console.debug({ error: JSON.stringify(error) });
@@ -294,6 +274,11 @@ function PurchaseSection() {
       }
     }
   }, [amount, selectedOption, destinationAddress, address]);
+
+  const isPhaseEnded = Date.now() / 1000 > currentPhaseEndDateTime;
+  if (isPhaseEnded) {
+    return <ClaimSorenTokens />;
+  }
 
   return (
     <div className="purchase-sectionbg">
