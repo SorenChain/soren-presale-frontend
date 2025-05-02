@@ -9,7 +9,12 @@ import { stripePromise } from "../../config/stripe";
 import { toast } from "react-toastify";
 import { parseEther } from "viem";
 import { ethers } from "ethers";
-import { PRE_SALE_CONTRACT_ADDRESS, PRE_SALE_ROUND_ID, USDT_TOKEN_ADDRESS } from "../../constants";
+import {
+  PRE_SALE_CONTRACT_ADDRESS,
+  PRE_SALE_ROUND_ID,
+  USDT_TOKEN_ADDRESS,
+  ETHER_BASE_DECIMAL,
+} from "../../constants";
 import ClaimSorenTokens from "../../components/ClaimSorenTokens";
 
 function PurchaseSection() {
@@ -35,10 +40,11 @@ function PurchaseSection() {
   });
 
   const currentPreSaleRoundPrice =
-    Number(preSaleRoundConfig?.data?.[3]) / 1e18 || 0;
-  const totalTokens = Number("100000000000000000000");
-  const tokensRemaining = Number("67000000000000000000");
-  const currentPhaseEndDateTime = 1746100062;
+    Number(preSaleRoundConfig?.data?.[3]) / ETHER_BASE_DECIMAL || 0;
+  const totalTokens = Number(preSaleRoundConfig?.data?.[4]) || 0;
+  const tokensRemaining = Number(preSaleRoundConfig?.data?.[6]) || 0;
+
+  const currentPhaseEndDateTime = preSaleRoundConfig?.data?.[2] || Date.now();
 
   console.debug({ preSaleRoundConfig, currentPreSaleRoundPrice });
 
@@ -71,7 +77,7 @@ function PurchaseSection() {
     functionName: "ethToTokenAmount",
     args:
       selectedOption === "ETH" && amount > 0
-        ? [PRE_SALE_ROUND_ID, (amount * 1e18).toString()]
+        ? [PRE_SALE_ROUND_ID, (amount * ETHER_BASE_DECIMAL).toString()]
         : undefined,
     query: { enabled: selectedOption === "ETH" && amount > 0 },
   });
@@ -187,7 +193,11 @@ function PurchaseSection() {
       } else if (selectedOption === "ETH" && tokenToEth?.data) {
         console.debug({ newSorenValue, action: "setting value ETH" });
 
-        setAmount((parseFloat(tokenToEth.data.toString()) / 1e18).toFixed(6));
+        setAmount(
+          (parseFloat(tokenToEth.data.toString()) / ETHER_BASE_DECIMAL).toFixed(
+            6
+          )
+        );
       }
     },
     [selectedOption]
@@ -213,6 +223,7 @@ function PurchaseSection() {
             body: JSON.stringify({
               amount: Math.round(amount * 100),
               address: destinationAddress || address,
+              convertedSoren,
             }),
           }
         );
@@ -228,7 +239,10 @@ function PurchaseSection() {
     } else {
       if (!address) return toast.error("Please connect with metamask");
       if (selectedOption === "USDT") {
-        if (!(currentApproval?.data <= amount * 1_000_000)) {
+        console.log("hello");
+        console.log(currentApproval?.data);
+        console.log(amount * 1_000_000);
+        if (currentApproval?.data < amount * 1_000_000) {
           console.log(currentApproval?.data);
           toast.error("Please approve USDT first.");
           writeContract({
@@ -273,10 +287,10 @@ function PurchaseSection() {
         }
       }
     }
-  }, [amount, selectedOption, destinationAddress, address]);
+  }, [amount, selectedOption, destinationAddress, address, convertedSoren]);
 
   const isPhaseEnded = Date.now() / 1000 > currentPhaseEndDateTime;
-  if (isPhaseEnded) {
+  if (!isPhaseEnded) {
     return <ClaimSorenTokens />;
   }
 

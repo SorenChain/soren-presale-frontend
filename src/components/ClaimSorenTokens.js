@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useAccount, useReadContract, useWriteContract } from "wagmi";
 import { toast } from "react-toastify";
 
-import { PRE_SALE_CONTRACT_ADDRESS, PRE_SALE_ROUND_ID } from "../constants";
+import { ETHER_BASE_DECIMAL, PRE_SALE_CONTRACT_ADDRESS, PRE_SALE_ROUND_ID } from "../constants";
 import preSaleABI from "../abis/presaleABI.json";
 
 const ClaimSorenTokens = () => {
@@ -15,15 +15,15 @@ const ClaimSorenTokens = () => {
     address: PRE_SALE_CONTRACT_ADDRESS,
     abi: preSaleABI,
     functionName: "claimableAmount",
-    args: [PRE_SALE_ROUND_ID],
+    args: [address, PRE_SALE_ROUND_ID],
   });
 
-  console.debug({ claimableAmountConfig });
+  console.debug({ claimableAmountConfig, claimAmount: claimableAmountConfig.data  });
 
   // TODO: Replace with actual contract call to fetch claimable amount
   useEffect(() => {
     if (address) {
-      setClaimableAmount("500");
+      setClaimableAmount(Number(claimableAmountConfig.data)/ETHER_BASE_DECIMAL || "0");
     }
   }, [address, claimableAmountConfig]);
 
