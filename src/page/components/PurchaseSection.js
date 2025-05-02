@@ -290,7 +290,7 @@ function PurchaseSection() {
   }, [amount, selectedOption, destinationAddress, address, convertedSoren]);
 
   const isPhaseEnded = Date.now() / 1000 > currentPhaseEndDateTime;
-  if (!isPhaseEnded) {
+  if (isPhaseEnded) {
     return <ClaimSorenTokens />;
   }
 
