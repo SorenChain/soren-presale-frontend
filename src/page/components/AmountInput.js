@@ -80,6 +80,7 @@ function AmountInput({
           placeholder="0x..."
           className="w-full p-2 border rounded text-white"
           disabled={isConnected}
+          style={{backgroundColor: "black"}}
         />
       </div>
     </div>
