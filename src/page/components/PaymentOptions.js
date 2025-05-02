@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import EthereumIcon from "../assets/soren-icon.svg";
-import UsdtIcon from "../assets/ETH.svg";
+import UsdtIcon from "../assets/POL.svg";
 import UsdIcon from "../assets/USDT.svg";
 import CardImage from "../assets/card.svg";
 
@@ -19,13 +19,13 @@ function PaymentOptions({ selectedOption, handleSelectedOption }) {
             <div className="crypto-buttons">
               <button
                 className={`crypto-button ${
-                  selectedOption === "ETH" ? "active" : ""
+                  selectedOption === "POL" ? "active" : ""
                 }`}
-                onClick={() => handleSelectedOption("ETH")}
+                onClick={() => handleSelectedOption("POL")}
               >
-                <img src={UsdtIcon} alt="ETH" className="crypto-icon" />
+                <img src={UsdtIcon} alt="POL" className="crypto-icon" />
                 <br />
-                <span>ETH</span>
+                <span>POL</span>
               </button>
 
               <button

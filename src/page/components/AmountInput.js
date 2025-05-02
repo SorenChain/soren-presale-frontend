@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import SorenIcon from "../assets/soren-icon.svg";
-import UsdtIcon from "../assets/ETH.svg";
+import UsdtIcon from "../assets/POL.svg";
 import UsdIcon from "../assets/USDT.svg";
 
 function AmountInput({
@@ -14,8 +14,8 @@ function AmountInput({
   isConnected,
 }) {
   const getSelectedOptionIcon = useCallback(() => {
-    return selectedOption === "ETH" ? (
-      <img src={UsdtIcon} alt="ETH" className="crypto-icon" />
+    return selectedOption === "POL" ? (
+      <img src={UsdtIcon} alt="POL" className="crypto-icon" />
     ) : (
       <img src={UsdIcon} alt="USDT" className="soren-icon-small" />
     );

@@ -18,7 +18,7 @@ import {
 import ClaimSorenTokens from "../../components/ClaimSorenTokens";
 
 function PurchaseSection() {
-  const [selectedOption, setSelectedOption] = useState("ETH");
+  const [selectedOption, setSelectedOption] = useState("POL");
   const [amount, setAmount] = useState();
   const [convertedSoren, setConvertedSoren] = useState(0);
   const { address, isConnected } = useAccount();
@@ -70,16 +70,16 @@ function PurchaseSection() {
 
   const POLToSoren = useReadContract({
     address:
-      selectedOption === "ETH" && amount > 0
+      selectedOption === "POL" && amount > 0
         ? PRE_SALE_CONTRACT_ADDRESS
         : undefined,
     abi: preSaleABI,
     functionName: "ethToTokenAmount",
     args:
-      selectedOption === "ETH" && amount > 0
+      selectedOption === "POL" && amount > 0
         ? [PRE_SALE_ROUND_ID, (amount * ETHER_BASE_DECIMAL).toString()]
         : undefined,
-    query: { enabled: selectedOption === "ETH" && amount > 0 },
+    query: { enabled: selectedOption === "POL" && amount > 0 },
   });
 
   // Reverse conversion
@@ -96,16 +96,16 @@ function PurchaseSection() {
 
   const tokenToEth = useReadContract({
     address:
-      selectedOption === "ETH" && convertedSoren > 0
+      selectedOption === "POL" && convertedSoren > 0
         ? PRE_SALE_CONTRACT_ADDRESS
         : undefined,
     abi: preSaleABI,
     functionName: "ethBuyHelper",
     args:
-      selectedOption === "ETH" && convertedSoren > 0
+      selectedOption === "POL" && convertedSoren > 0
         ? [convertedSoren]
         : undefined,
-    query: { enabled: selectedOption === "ETH" && convertedSoren > 0 },
+    query: { enabled: selectedOption === "POL" && convertedSoren > 0 },
   });
 
   // TO handle the toast for success and cancel checkout page
@@ -163,7 +163,7 @@ function PurchaseSection() {
   useEffect(() => {
     if (selectedOption === "USDT" && usdtToSoren?.data !== undefined) {
       setConvertedSoren(usdtToSoren.data.toString());
-    } else if (selectedOption === "ETH" && POLToSoren?.data !== undefined) {
+    } else if (selectedOption === "POL" && POLToSoren?.data !== undefined) {
       setConvertedSoren(POLToSoren.data.toString());
     } else if (selectedOption === "USD" && usdtToSoren?.data !== undefined) {
       setConvertedSoren(usdtToSoren.data.toString());
@@ -190,8 +190,8 @@ function PurchaseSection() {
         setAmount(
           (parseFloat(tokenToUsdt.data.toString()) / 1_000_000).toFixed(2)
         );
-      } else if (selectedOption === "ETH" && tokenToEth?.data) {
-        console.debug({ newSorenValue, action: "setting value ETH" });
+      } else if (selectedOption === "POL" && tokenToEth?.data) {
+        console.debug({ newSorenValue, action: "setting value POL" });
 
         setAmount(
           (parseFloat(tokenToEth.data.toString()) / ETHER_BASE_DECIMAL).toFixed(
@@ -264,9 +264,9 @@ function PurchaseSection() {
         setTimeout(() => {
           currentApproval?.refetch?.();
         }, 4000);
-      } else if (selectedOption === "ETH") {
+      } else if (selectedOption === "POL") {
         try {
-          console.log("ETH buy logic not yet implemented");
+          console.log("POL buy logic not yet implemented");
           console.log(parseEther(amount.toString()), amount.toString());
           writeContract({
             abi: preSaleABI,
@@ -281,9 +281,9 @@ function PurchaseSection() {
               console.debug({ data: JSON.stringify(data) });
             },
           });
-          console.log("ETH buy logic not yet implemented");
+          console.log("POL buy logic not yet implemented");
         } catch (error) {
-          console.error("Error in ETH buy:", JSON.stringify(error));
+          console.error("Error in POL buy:", JSON.stringify(error));
         }
       }
     }

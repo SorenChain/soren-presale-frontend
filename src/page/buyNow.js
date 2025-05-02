@@ -14,7 +14,7 @@ const BuySoren = () => {
       <div className="navbarC">
         <div className=" navbar">
           <div className="navbar-left">
-            <img src={Logo} alt="ETH" />
+            <img src={Logo} alt="POL" />
           </div>
           <div className="d-flex align-items-center ">
             {/* <a href="#" className="nav-link">Home</a>
