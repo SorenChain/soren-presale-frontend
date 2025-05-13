@@ -791,11 +791,20 @@ footer p{
 .navbar{
   padding: 15px 30px;
 }
+.container-custom{
+  padding: 0 15px;
+}
+.crypto-button {
+  width: 200px;
+}
   }
 
 @media (max-width: 1300px) {
 .connector-top, .connector-bottom{
  width: 0; 
+}
+.crypto-button {
+  width: 150px;
 }
 }
 
