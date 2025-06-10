@@ -121,8 +121,8 @@ function PurchaseSection() {
         toast.loading("Verifying payment...");
 
         try {
-          const res = await fetch(
-            `https://3b93-2404-7c80-5c-70f8-8f25-1ddb-3ee8-4afa.ngrok-free.app/payment/verify-session?session_id=${sessionId}`,
+          const baseUrl = process.env.REACT_APP_BACKEND_URL || "https://api.gamimarket.io";
+          const res = await fetch(`${baseUrl}/payment/verify-session?session_id=${sessionId}`,
             {
               method: "POST",
             }
@@ -212,9 +212,9 @@ function PurchaseSection() {
       return toast.error("Please enter valid amount.");
 
     if (selectedOption === "USD") {
+      const baseUrl = process.env.REACT_APP_BACKEND_URL || "https://api.gamimarket.io";
       try {
-        const res = await fetch(
-          "https://3b93-2404-7c80-5c-70f8-8f25-1ddb-3ee8-4afa.ngrok-free.app/payment/create-checkout-session",
+        const res = await fetch(`${baseUrl}/payment/create-checkout-session`,
           {
             method: "POST",
             headers: {
