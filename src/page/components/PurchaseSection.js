@@ -22,13 +22,13 @@ function PurchaseSection() {
   const [amount, setAmount] = useState();
   const [convertedSoren, setConvertedSoren] = useState(0);
   const { address, isConnected } = useAccount();
-  const [destinationAddress, setDestinationAddress] = useState(address || "");
+  const [destinationAddress, setDestinationAddress] = useState(address);
   const { writeContract } = useWriteContract();
 
   const isUsdtOrUsd = ["USDT", "USD"].includes(selectedOption);
 
   useEffect(() => {
-    setDestinationAddress(address || "");
+    setDestinationAddress(address);
   }, [address]);
   // Pre-sale round values
   const preSaleRoundConfig = useReadContract({
@@ -121,8 +121,10 @@ function PurchaseSection() {
         toast.loading("Verifying payment...");
 
         try {
-          const baseUrl = process.env.REACT_APP_BACKEND_URL || "https://api.gamimarket.io";
-          const res = await fetch(`${baseUrl}/payment/verify-session?session_id=${sessionId}`,
+          const baseUrl =
+            process.env.REACT_APP_BACKEND_URL || "https://api.gamimarket.io";
+          const res = await fetch(
+            `${baseUrl}/payment/verify-session?session_id=${sessionId}`,
             {
               method: "POST",
             }
@@ -212,21 +214,21 @@ function PurchaseSection() {
       return toast.error("Please enter valid amount.");
 
     if (selectedOption === "USD") {
-      const baseUrl = process.env.REACT_APP_BACKEND_URL || "https://api.gamimarket.io";
+      const baseUrl =
+        process.env.REACT_APP_BACKEND_URL || "https://api.gamimarket.io";
       try {
-        const res = await fetch(`${baseUrl}/payment/create-checkout-session`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              amount: Math.round(amount * 100),
-              address: destinationAddress || address,
-              convertedSoren,
-            }),
-          }
-        );
+        const res = await fetch(`${baseUrl}/payment/create-checkout-session`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            amount: Math.round(amount * 100),
+            address: destinationAddress || address,
+            convertedSoren,
+             baseURL: window.location.href.replace(/\/+$/, ''),
+          }),
+        });
 
         const data = await res.json();
         const stripe = await stripePromise;
@@ -330,10 +332,12 @@ function PurchaseSection() {
               You will receive: {convertedSoren} Soren Tokens
             </div>
           )}
-          <button className="connect-wallet-button" onClick={handleBuy}>
-            Buy
+         <button className="connect-wallet-button" onClick={handleBuy}
+          disabled={!destinationAddress}>
+           { !destinationAddress ? "Add wallet Address":"Buy"}
           </button>
         </div>
+      
       </div>
     </div>
   );
